@@ -287,9 +287,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e4253e97b381b9499e89a2e0022f278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies:
+  enemyPrefabs:
   - {fileID: 1969611154329284, guid: 0b1b9314b9e4d394b8e08c96502d8314, type: 2}
-  obsticles: []
+  obstaclesPrefabs:
+  - {fileID: 1306790948599214, guid: 4bf07b0d5aca02c41a7345116e4a3e05, type: 2}
   Player: {fileID: 1775051630}
 --- !u!1 &1406247127
 GameObject:
