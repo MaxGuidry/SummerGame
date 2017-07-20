@@ -11,6 +11,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable, IDamager
     [HideInInspector] public int EnemyMaxHP;
     public CombatUIEvent InCombatUI = new CombatUIEvent();
     public CombatUIEvent OutOfCombatUI = new CombatUIEvent();
+    private TurnBasedCombat combat;
 
     public void DoDamage(IDamageable defender)
     {
@@ -25,33 +26,39 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable, IDamager
     void Start()
     {
         EnemyMaxHP = EnemyCurrentHP;
+        this.gameObject.tag = "InActiveEnemy";
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
+            combat = other.GetComponent<TurnBasedCombat>();
             inCombat();
         }
     }
+
     void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
-        {
             outCombat();
-        }
     }
 
-    void inCombat()
+    public void inCombat()
     {
-        InCombatUI.Invoke();
         //Time.timeScale = 0;
+        InCombatUI.Invoke();
+        TurnBasedCombat.Enemy = this.gameObject;
+        combat.StartedCombat();
+        this.gameObject.tag = "ActiveEnemy";
     }
 
-    void outCombat()
+    public void outCombat()
     {
         //Time.timeScale = 1;
         OutOfCombatUI.Invoke();
+        TurnBasedCombat.Enemy = null;
+        this.gameObject.tag = "InActiveEnemy";
     }
 
     [Serializable]
