@@ -17,7 +17,6 @@ public class CombatUI : MonoBehaviour {
 
     public void Start()
     {
-
         UICanvas.enabled = false;
     }
     public void CombatEnabled()
