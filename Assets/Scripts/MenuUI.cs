@@ -5,10 +5,12 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MenuUI : MonoBehaviour {
+    public Canvas thisCanvas, otherCanvas;
     public AudioClip MusicClip;
+    public Slider loadingSlider;
     public int StartDelay;
-    public string SceneToStart;
-    public Text MiddleText;
+    public int SceneToStart;
+    public Text MiddleText,ProgressText;
     
     private AudioSource MusicSource;
 
@@ -17,6 +19,7 @@ public class MenuUI : MonoBehaviour {
         MusicSource = GetComponent<AudioSource>();
         MusicSource.clip = MusicClip;
         MusicSource.Play();
+        otherCanvas.gameObject.SetActive(false);
 	}
     public void QuitGame()
     {
@@ -24,7 +27,7 @@ public class MenuUI : MonoBehaviour {
     }
     public void StartGame()
     {
-        StartCoroutine(Load(StartDelay, SceneToStart));
+        StartCoroutine(Load());
     }
     public void Controls()
     {
@@ -34,9 +37,21 @@ public class MenuUI : MonoBehaviour {
     {
         MiddleText.text = "Credits";
     }
-    public IEnumerator Load(int delay, string scene)
+    public IEnumerator Load()
     {
-        yield return new WaitForSeconds(delay);
-        SceneManager.LoadScene(scene);
+        AsyncOperation operation = SceneManager.LoadSceneAsync(SceneToStart);
+        while (!operation.isDone)
+        {
+            thisCanvas.gameObject.SetActive(false);
+            otherCanvas.gameObject.SetActive(true);
+
+            float progress = Mathf.Clamp01(operation.progress / .9f);
+
+            loadingSlider.value = progress;
+            ProgressText.text = progress * 100 + "%";
+
+            Debug.Log(operation.progress);
+            yield return null;
+        }
     }
 }

@@ -17,7 +17,6 @@ public class CombatUI : MonoBehaviour {
 
     public void Start()
     {
-
         UICanvas.enabled = false;
     }
     public void CombatEnabled()
@@ -28,7 +27,6 @@ public class CombatUI : MonoBehaviour {
     }
     public void SetEnemyHealthUI()
     {
-        Debug.Log(Enemy.EnemyCurrentHP);
         EnemyTextHP.text = "Enemy: " + Enemy.EnemyCurrentHP + " / " + Enemy.EnemyMaxHP;
         EnemySlider.value = Enemy.EnemyCurrentHP;
         EnemySlider.maxValue = Enemy.EnemyMaxHP;

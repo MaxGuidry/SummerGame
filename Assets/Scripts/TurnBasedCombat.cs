@@ -60,7 +60,6 @@ public class TurnBasedCombat : MonoBehaviour
         {
             case (BattleStates.START):
                 {
-                    Debug.Log(Enemy.GetComponent<EnemyBehaviour>().EnemyCurrentHP);
                     UIUpdate.SetEnemyHealthUI();
                     UIUpdate.SetPlayerHealthUI();
                 }
