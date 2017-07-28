@@ -76,7 +76,7 @@ public class ProceduralGeneration : MonoBehaviour
             for (int i = 0; i < numEnemies; i++)
             {
                 GameObject g = GameObject.Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Count)]);
-                g.transform.position = new Vector3(lastGeneratedXPos - 20f + Random.Range(0, 21), Mathf.Ceil(Player.transform.position.y / 20f) * 20f, 0);
+                g.transform.position = new Vector3(lastGeneratedXPos - 20f + Random.Range(0, 21), Mathf.Ceil(Player.transform.position.y / 20f) * 20f - (float)(Random.Range(0,21)), 0);
                 generatedObjects.Add(g);
             }
         }
@@ -91,7 +91,7 @@ public class ProceduralGeneration : MonoBehaviour
                 //{
                 //}
 
-                g.transform.position = new Vector3(lastGeneratedXPos - 20f + Random.Range(0, 21), Mathf.Ceil(Player.transform.position.y / 20f) * 20f, 0);
+                g.transform.position = new Vector3(lastGeneratedXPos - 20f + Random.Range(0, 21), Mathf.Ceil(Player.transform.position.y / 20f) * 20f - (float)(Random.Range(0, 21)), 0);
                 generatedObjects.Add(g);
             }
         }
