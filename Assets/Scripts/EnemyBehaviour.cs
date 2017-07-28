@@ -47,9 +47,9 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable, IDamager
     public void inCombat()
     {
         //Time.timeScale = 0;
-        InCombatUI.Invoke();
         TurnBasedCombat.Enemy = this.gameObject;
         combat.StartedCombat();
+        InCombatUI.Invoke();
         this.gameObject.tag = "ActiveEnemy";
     }
 
